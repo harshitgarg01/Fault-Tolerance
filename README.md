@@ -60,6 +60,9 @@ This class consist of attributes in form of 3 arrays of length 6 storing state, 
 
 The purpose of our application is to take in a unique identifier every 1 second and invoke each of the 6 methods with this identifier, until a true value is returned. The application uses retry logic (exponential back off) to solve the problem.  The program though runs across multiple threads but they are considerably limited as compared to first model. The main architecture here involves just division of main thread (specifically thread running the identifierDistributor function) into 10 extra different threads. Each thread implements a unique identifier but here it implements all the methods across the single thread in a sequential manner instead of having separate threads for each method. This helps in extending our application to dependent methods (example method2 can be only implemented after method1 for an identifier) and limiting our thread pool. 
 
+**Assumption** 
+Dependency of methods are in order 1->2->3->4->5->6.
+
 ### Functions 
 
 **main function** 
@@ -113,3 +116,20 @@ This class consist of attributes in form of 3 arrays of length 6 storing state, 
 **Overview**
 
 It has exactly similar setup as the first model just it is extended to incorporate dependent method nature. This is achieved by using a global vector identifierPassed where the following vector restrict the threads for a certain method to work before completion of its dependent method. 
+
+**Assumption** 
+Dependency of methods are in order 1->2->3->4->5->6.
+
+## Features: 
+
+1.Model1 does not involve any dependency among methods thus all the methods can run parallel which leads to less identifier invocation time for all the methods. 
+
+2. Model2 and Model3 act as extension of the problem statement while method1 cannot be used in that scenario. 
+
+3. All the Models involve exponential back off logic which though might consume a few more seconds than repeated call of methods but it substantially lowers the retry attempts of method in a degradation state and hence preserving a lot of resources. 
+
+4. Model3 appears to be superior to Model2 in the manner that if a certain method attains a long degradation state than due to parallel computation it does not affect the method proceeding it in case of model3 while sequential arrangement of Method in Model2 completely stops the program. Example if method2 has a degradation state say for 60 sec and method1 is independent of it yet in case of model2 no invocation would be possible while model3 where method1 runs on a separate thread no such stoppage in invocation of method1 would happen. 
+
+5. As number of methods in application are increased then the thread pool for model1 and model3 might become too large which could become tough to manage while no such problem would be there in model2. 
+
+6. Another thing that separates model3 from model1 and model2 is that the identifier passed to methods for execution are in arbitrary order in method3 while they follow a sequential order in model1 and model2.  
