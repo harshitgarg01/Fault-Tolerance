@@ -122,7 +122,7 @@ Dependency of methods are in order 1->2->3->4->5->6.
 
 ## Features: 
 
-1.Model1 does not involve any dependency among methods thus all the methods can run parallel which leads to less identifier invocation time for all the methods. 
+1. Model1 does not involve any dependency among methods thus all the methods can run parallel which leads to less identifier invocation time for all the methods. 
 
 2. Model2 and Model3 act as extension of the problem statement while method1 cannot be used in that scenario. 
 
