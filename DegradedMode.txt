@@ -1,1 +1,0 @@
-Amount of time it will remain in degraded mode for Method2 is 540 seconds.
