@@ -1,16 +1,16 @@
 # Fault-Tolerance
 
-##First Model 
+## First Model 
 
-#Overview 
+# Overview 
 
 The purpose of our application is to take in a unique identifier every 1 second and invoke each of the 6 methods with this identifier, until a true value is returned. The application uses retry logic (exponential back off) to solve the problem. The program runs across multiple threads which are synchronized properly to avoid any errors. It consists of a main thread that splits into 6 extra threads where each thread runs a particular method. Each sub thread is then split into 10 more threads to run for different identifiers at the same time. Along with that a few separate threads are also created to control the parameters of methods according to the program need. Below are the list of functions and classes that help run the application effectively. 
 
  
 
-##Functions 
+## Functions 
 
-#main function 
+# main function 
 
 The main function begins with calling below listed functions on new threads like calling 6 threads for function retryLimitingHandler , 6 threads for particularMethodExecutor where each thread works for a particular method from 1 to 6. Next it inputs data from files -> DegradedMode.txt and InputFile.txt. Then it starts adding one identifier after 1 sec to global vector variable identifierStorage. After finishing with inputs, it begins to join all the new threads which were created to the main thread. Then it starts writing the desired statistics in a csv file which include identifier name, identifier completion time, number of attempts, time at which each attempt is called and total time taken for that attempt. This is done for all methods and identifier and stored in the csv file for further plotting. 
 
