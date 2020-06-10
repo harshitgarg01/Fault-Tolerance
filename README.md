@@ -60,56 +60,56 @@ This class consist of attributes in form of 3 arrays of length 6 storing state, 
 
 The purpose of our application is to take in a unique identifier every 1 second and invoke each of the 6 methods with this identifier, until a true value is returned. The application uses retry logic (exponential back off) to solve the problem.  The program though runs across multiple threads but they are considerably limited as compared to first model. The main architecture here involves just division of main thread (specifically thread running the identifierDistributor function) into 10 extra different threads. Each thread implements a unique identifier but here it implements all the methods across the single thread in a sequential manner instead of having separate threads for each method. This helps in extending our application to dependent methods (example method2 can be only implemented after method1 for an identifier) and limiting our thread pool. 
 
-Functions 
+### Functions 
 
-main function 
+**main function** 
 
 The main functions main purpose is to take inputs from files like DegradedMode.txt and InputFile.txt. After that it calls the identifierDistributor function across a new thread and then begins to provide a unique identifier every second via a global vector. Besides that, after implementation of retry logic it is used to store the necessary statistics in csv as done in first model. 
 
- identifierDistributor function 
+ **identifierDistributor function**
 
 This function is called by the main function along a different thread. This function is basically used to create and maintain 10 threads with each thread acts all the methods for a particular identifier. Thus, it contains arrays like threadClosure and availableThread to maintain the thread pool. Besides this at the start it also calls retryLimitingHandler function and setDegradationTime function along different threads like the main function did in the First Model to maintain the desired properties of methods. 
 
-allMethodExecutor function 
+**allMethodExecutor function**
 
 This function calls all the methods in a sequential order and hence ends up acting like an extension to the problem statement where we can also work with methods which are dependent on each other. Thus, it ends up calling retryLogicImplementation function in a sequential order according to dependency of the methods. No separate threads are created for each function. 
 
-retryLimitingHandler function 
+**retryLimitingHandler function** 
 
 The aim of this function is to set retryLimit to 0 after every 1 second. This helps us in maintaining the desired 2 true values per second property of the normal mode. It takes in index as an argument to know which method retryLimit it has to work on. It works on a separate thread from rest of the program. 
 
-setDegradationTime function 
+**setDegradationTime function** 
 
 This function is used to set the degradation time for a particular method according to the need of the application. It sets this time randomly in the run time of program and it too works on a separate thread from the rest of the program. 
 
-stringToInt function 
+**stringToInt function**
 
 This method is used to convert a string of numbers into integers. 
 
-randomSeedSetUp function 
+**randomSeedSetUp function** 
 
 This method is used to generate a specific seed for each thread before going to allMethodExecutor function to prevent different threads from getting the same values from rand () and hence leading to the desired randomness. 
 
-retryLogicImplementation function 
+**retryLogicImplementation function** 
 
 This function applies the exponential back off retry logic for a particular identifier for a particular method. This is where we use the global 2d vector of timeStorage class to get the useful metric time values of the program that could later be used for statistical analysis. 
 
-Classes 
+### Classes 
 
-Method1, Method2, Method3, Method4, Method5, Method6 
+**Method1, Method2, Method3, Method4, Method5, Method6** 
 
 All these classes are similar whose main motive is to call the modeGuesser method(public), which on taking the identifier returns either true or false. Internally it has two private methods which are called normalMode and degradedMode and modeGuesser calls them randomly using the rand () function. Other desired properties which are needed to be satisfied by these classes are taken in care by an instance of MethodParameters. 
 
-TimeStorage 
+**TimeStorage**
 
 This class is basically used to store the time of completion of identifier, starting and ending time for each attempt for an identifier for all methods. It uses chrono library to store time in a format that is easily convertible to seconds later on. This class also stores the number of attempts it took for a particular identifier to successfully compete the method. 
 
-MethodParameters 
+**MethodParameters**
 
 This class consist of attributes in form of 3 arrays of length 6 storing state, mode and retryLimit for each method. This class aim is to change these parameters of Methods according to the requirement of the program. Thus, it has its required getters and setters. Also, it contains a mutex which helps in synchronized execution of class across multiple threads. 
 
-Third Model 
+### Third Model
 
-Overview 
+**Overview**
 
 It has exactly similar setup as the first model just it is extended to incorporate dependent method nature. This is achieved by using a global vector identifierPassed where the following vector restrict the threads for a certain method to work before completion of its dependent method. 
