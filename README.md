@@ -1,8 +1,8 @@
-# Fault-Tolerance
+## Fault-Tolerance
 
-## First Model 
+# First Model 
 
-# Overview 
+** Overview **
 
 The purpose of our application is to take in a unique identifier every 1 second and invoke each of the 6 methods with this identifier, until a true value is returned. The application uses retry logic (exponential back off) to solve the problem. The program runs across multiple threads which are synchronized properly to avoid any errors. It consists of a main thread that splits into 6 extra threads where each thread runs a particular method. Each sub thread is then split into 10 more threads to run for different identifiers at the same time. Along with that a few separate threads are also created to control the parameters of methods according to the program need. Below are the list of functions and classes that help run the application effectively. 
 
