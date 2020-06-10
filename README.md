@@ -1,6 +1,6 @@
-## Fault-Tolerance
+# Fault-Tolerance
 
-# First Model 
+## First Model 
 
 **Overview**
 
@@ -8,7 +8,7 @@ The purpose of our application is to take in a unique identifier every 1 second 
 
  
 
-# Functions 
+### Functions 
 
 **main function** 
 
@@ -38,7 +38,7 @@ This method is used to generate a specific seed for each thread before going to 
 
 This function applies the exponential back off retry logic for a particular identifier for a particular method. This is where we use the global 2d vector of timeStorage class to get the useful metric time values of the program that could later be used for statistical analysis. 
 
-# Classes 
+### Classes 
 
 **Method1, Method2, Method3, Method4, Method5, Method6**
 
@@ -54,7 +54,7 @@ This class consist of attributes in form of 3 arrays of length 6 storing state, 
 
  
 
-# Second Model 
+## Second Model 
 
 **Overview**
 
