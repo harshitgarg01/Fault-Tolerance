@@ -36,7 +36,7 @@ This method is used to generate a specific seed for each thread before going to 
 
 **retryLogicImplementation function**
 
-This function applies the exponential back off retry logic for a particular identifier for a particular method. This is where we use the global 2d vector of timeStorage class to get the useful metric time values of the program that could later be used for statistical analysis. 
+This function applies the exponential back off retry logic for a particular identifier for a particular method. This is where we use the global metrics vector of timeStorage class to get the useful metric time values of the program that could later be used for statistical analysis. 
 
 ### Classes 
 
@@ -92,7 +92,7 @@ This method is used to generate a specific seed for each thread before going to 
 
 **retryLogicImplementation function** 
 
-This function applies the exponential back off retry logic for a particular identifier for a particular method. This is where we use the global 2d vector of timeStorage class to get the useful metric time values of the program that could later be used for statistical analysis. 
+This function applies the exponential back off retry logic for a particular identifier for a particular method. This is where we use the global metrics vector of timeStorage class to get the useful metric time values of the program that could later be used for statistical analysis. 
 
 ### Classes 
 
