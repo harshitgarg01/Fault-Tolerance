@@ -6,7 +6,7 @@
 
 The purpose of our application is to take in a unique identifier every 1 second and invoke each of the 6 methods with this identifier, until a true value is returned. The application uses retry logic (exponential back off) to solve the problem. The program runs across multiple threads which are synchronized properly to avoid any errors. It consists of a main thread that splits into 6 extra threads where each thread runs a particular method. Each sub thread is then split into 10 more threads to run for different identifiers at the same time. Along with that a few separate threads are also created to control the parameters of methods according to the program need. Below are the list of functions and classes that help run the application effectively. 
 
- 
+ ![](Images/model1%20framework.png)
 
 ### Functions 
 
@@ -59,6 +59,8 @@ This class consist of attributes in form of 3 arrays of length 6 storing state, 
 **Overview**
 
 The purpose of our application is to take in a unique identifier every 1 second and invoke each of the 6 methods with this identifier, until a true value is returned. The application uses retry logic (exponential back off) to solve the problem.  The program though runs across multiple threads but they are considerably limited as compared to first model. The main architecture here involves just division of main thread (specifically thread running the identifierDistributor function) into 10 extra different threads. Each thread implements a unique identifier but here it implements all the methods across the single thread in a sequential manner instead of having separate threads for each method. This helps in extending our application to dependent methods (example method2 can be only implemented after method1 for an identifier) and limiting our thread pool. 
+
+ ![](Images/model2%20framework.png)
 
 **Assumption** 
 Dependency of methods are in order 1->2->3->4->5->6.
@@ -116,6 +118,8 @@ This class consist of attributes in form of 3 arrays of length 6 storing state, 
 **Overview**
 
 It has exactly similar setup as the first model just it is extended to incorporate dependent method nature. This is achieved by using a global vector identifierPassed where the following vector restrict the threads for a certain method to work before completion of its dependent method. 
+
+ ![](Images/model3%20framework.png)
 
 **Assumption** 
 Dependency of methods are in order 1->2->3->4->5->6.
