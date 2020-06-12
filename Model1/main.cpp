@@ -549,18 +549,6 @@ int main()
 	cout << "Total time taken by the application is " << finalDuration.count() << " seconds" << endl;
 	cout << identifierCompletedCount << endl;
 
-	for (loopItem = 0; loopItem < 6; loopItem++)
-	{
-		for (innerLoop1 = 0; innerLoop1 < 1800; innerLoop1++)
-		{
-			if (allSeedsUsed[loopItem][innerLoop1] == 0)
-			{
-				cout << loopItem << "->" << innerLoop1 << endl;
-			}
-
-		}
-	}
-
 	ofstream outputCSV;
 	outputCSV.open("retryStats.csv");
 	outputCSV << "identifier,retries,identifier time,retrytime" << endl;
