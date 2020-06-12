@@ -573,7 +573,7 @@ int main()
 			inputBegin = 1;
 			flag = 1;
 		}
-		this_thread::sleep_for(chrono::microseconds(999850)); // to get a unique identifier input after every one second
+		this_thread::sleep_for(chrono::microseconds(989850)); // to get a unique identifier input after every one second
 	}
 	totalInputTaken = countInput;
 	inputEnd = true;
