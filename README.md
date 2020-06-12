@@ -124,6 +124,19 @@ It has exactly similar setup as the first model just it is extended to incorpora
 **Assumption** 
 Dependency of methods are in order 1->2->3->4->5->6.
 
+## Statistics
+
+The Following Site [**statistics**](https://harshitgarg01.github.io/) contains statistics in the form of graph for all the models under 3 different scenarios ->
+1. 30 min runtime with degradation state of 60 sec for method2
+2. 30 min runtime with degradation state of 540 sec for method2
+3. 30 min runtime with degradation state of 900 sec for both method2 and method4 at different times.
+
+Note : It is assumed that model2 and model3 have method dependency in the order 1->2->3->4->5->6.
+
+## Results
+
+
+
 ## Features: 
 
 1. Model1 does not involve any dependency among methods thus all the methods can run parallel which leads to less identifier invocation time for all the methods. 
