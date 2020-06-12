@@ -135,6 +135,8 @@ Note : It is assumed that model2 and model3 have method dependency in the order 
 
 ## Results
 
+Through the graphs for attempts vs identifier for scenario 1 for all the models we can clearly see the effect and benefit of exponential backoff retry logic. When we don't use exponential backoff logic in model1 we see that during the degradation period of 60 sec that begins at 84 we see that number of attempts the identifier can make can go as high as 815 which is substantially higher than what what we see with exponential backoff on the same model where it only goes as high as 31 which even the methods without degradation state might go due to occurance of an odd identifier and randomness of the methods. We can clearly see that in model1 with expo backoff the no of retries attempt got restricted to just 24 for identifier 84 as compared to 815.
+
 
 
 ## Features: 
